@@ -115,8 +115,10 @@ def rem_outside_deploy(df: pd.DataFrame) -> pd.DataFrame:
     in_window = ts.ge(don) & (dof.isna() | ts.le(dof))
     return df[in_window]
 
+
 def rem_dup_sessions(df: pd.DataFrame) -> pd.DataFrame:
-  if "eobs:start-timestamp" not in df.columns:
-      return df
-  return (df.sort_values("eobs:horizontal-accuracy-estimate")
-            .drop_duplicates(subset=["animal-id", "eobs:start-timestamp"], keep="first"))
+    if "eobs:start-timestamp" not in df.columns:
+        return df
+    return df.sort_values("eobs:horizontal-accuracy-estimate").drop_duplicates(
+        subset=["animal-id", "eobs:start-timestamp"], keep="first"
+    )
