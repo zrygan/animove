@@ -36,48 +36,20 @@ def clean_runner(
 
     @returns:
       - An ordered pair. The first entry is the new `df` made by applying `func` on `df`.
-        the second entry is a report of the data cleaning.
-
-
-    @warning:
-      This function ASSUMES that the callable `func` does not reset
-      the indices of `df`.
-
-      Example: `df` has indices (1,2,3). `func(df)` removes index 2.
-      The augmented version of `df` has indices (1,3). We do not fix
-      the indices after cleaning.
+        the second entry is a report...
     """
-    rows_before = len(df)
-
-    cleaned_df: pd.DataFrame = func(df)
-
-    rows_kept = len(cleaned_df)
-    rows_removed = len(df) - rows_kept
-
-    assert rows_before == rows_kept + rows_removed
-
-    removed_indices = df.index.difference(cleaned_df.index)
-    removed_rows = df.loc[removed_indices]
-
+    before = len(df)
+    after_df = func(df)
+    after = len(after_df)
+    removed = before - after
+    
     report = CleanReport(
-        rows_before=rows_before,
-        rows_remaining=rows_kept,
-        rows_removed=rows_removed,
-        examples=removed_rows.head(3),
+        rows_before=before,
+        rows_remaining=after,
+        rows_removed=removed,
+        examples=after_df.head(3) if after > 0 else pd.DataFrame()
     )
-
-    # only after generating the report can we reset the indices
-    cleaned_df = cleaned_df.reset_index(drop=True)
-
-    return cleaned_df, report
-
-
-def rem_fishers(df: pd.DataFrame) -> pd.DataFrame:
-    return df[df["individual-taxon-canonical-name"] == "Lynx rufus"]
-
-
-def rem_bad_gps(df: pd.DataFrame) -> pd.DataFrame:
-    return df.dropna(subset=["location-long", "location-lat"])
+    return after_df, report
 
 
 def rem_with_markers(df: pd.DataFrame) -> pd.DataFrame:
@@ -111,14 +83,29 @@ def rem_outside_deploy(df: pd.DataFrame) -> pd.DataFrame:
     """
     ts = df["timestamp-utc"]
     don = pd.to_datetime(df["deploy-on-date"], utc=True, errors="coerce")
-    dof = pd.to_datetime(df["deploy-off-date"], utc=True, errors="coerce")
-    in_window = ts.ge(don) & (dof.isna() | ts.le(dof))
-    return df[in_window]
+    doff = pd.to_datetime(df["deploy-off-date"], utc=True, errors="coerce")
+    
+    # Keep rows where timestamp is between deployment dates
+    mask = (ts >= don) & (ts <= doff)
+    return df[mask]
 
 
-def rem_dup_sessions(df: pd.DataFrame) -> pd.DataFrame:
-    if "eobs:start-timestamp" not in df.columns:
-        return df
-    return df.sort_values("eobs:horizontal-accuracy-estimate").drop_duplicates(
-        subset=["animal-id", "eobs:start-timestamp"], keep="first"
-    )
+# --- NEW FUNCTIONS ADDED FOR MCO1 ---
+
+def keep_only_bobcats(df: pd.DataFrame) -> pd.DataFrame:
+    """Filters the dataset to only include Lynx rufus records."""
+    if "animal-taxon" in df.columns:
+        df = df[df["animal-taxon"] == "Lynx rufus"]
+    return df
+
+def drop_dupes_and_nulls(df: pd.DataFrame) -> pd.DataFrame:
+    """Removes exact duplicate rows and drops critical missing values."""
+    # Drop exact duplicate rows
+    df = df.drop_duplicates()
+    
+    # Drop rows where critical movement or spatial data is missing
+    critical_cols = ['location-lat', 'location-long', 'ground-speed']
+    existing_critical = [c for c in critical_cols if c in df.columns]
+    df = df.dropna(subset=existing_critical)
+    
+    return df
