@@ -104,9 +104,9 @@ def keep_only_bobcats(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 def drop_dupes_and_nulls(df: pd.DataFrame) -> pd.DataFrame:
-    """Removes exact duplicate rows and drops critical missing values."""
-    # Drop exact duplicate rows
-    df = df.drop_duplicates()
+    """Removes duplicate GPS fixes (same animal, same instant) and drops critical missing values."""
+    # Drop duplicate fixes: same animal at the same timestamp
+    df = df.drop_duplicates(subset=["animal-id", "timestamp-utc"])
     
     # Drop rows where critical movement or spatial data is missing
     critical_cols = ['location-lat', 'location-long', 'ground-speed']
