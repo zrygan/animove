@@ -81,12 +81,17 @@ def rem_outside_deploy(df: pd.DataFrame) -> pd.DataFrame:
     Assumes `add_utc_time` from `transformer.py` is applied on the input
     `df`.
     """
-    ts = df["timestamp-utc"]
+    if "timestamp-utc" not in df.columns:
+        # Fallback in case transformer hasn't renamed the column yet
+        ts = pd.to_datetime(df["timestamp"], utc=True, errors="coerce")
+    else:
+        ts = df["timestamp-utc"]
+        
     don = pd.to_datetime(df["deploy-on-date"], utc=True, errors="coerce")
     doff = pd.to_datetime(df["deploy-off-date"], utc=True, errors="coerce")
     
-    # Keep rows where timestamp is between deployment dates
-    mask = (ts >= don) & (ts <= doff)
+    # Keep rows where timestamp is >= deploy-on AND (<= deploy-off OR deploy-off is missing)
+    mask = (ts >= don) & ((ts <= doff) | doff.isna())
     return df[mask]
 
 
