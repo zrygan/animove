@@ -95,8 +95,6 @@ def rem_outside_deploy(df: pd.DataFrame) -> pd.DataFrame:
     return df[mask]
 
 
-# --- NEW FUNCTIONS ADDED FOR MCO1 ---
-
 def keep_only_bobcats(df: pd.DataFrame) -> pd.DataFrame:
     """Filters the dataset to only include Lynx rufus records."""
     if "animal-taxon" in df.columns:
@@ -113,4 +111,10 @@ def drop_dupes_and_nulls(df: pd.DataFrame) -> pd.DataFrame:
     existing_critical = [c for c in critical_cols if c in df.columns]
     df = df.dropna(subset=existing_critical)
     
+    return df
+
+def drop_invalid_movement(df: pd.DataFrame) -> pd.DataFrame:
+    """Removes rows where step-distance couldn't be computed (first fix per animal)."""
+    if "step-meters" in df.columns:
+        df = df.dropna(subset=["step-meters"])
     return df
