@@ -81,7 +81,7 @@ def _helper_season_from_month(month: int) -> str:
     }.get(month)
 
 
-def _helper_haversine_m(lat1, lon1, lat2, lon2):
+def haversine_m(lat1, lon1, lat2, lon2):
     R = 6_371_000.0
     p1, p2 = np.radians(lat1), np.radians(lat2)
     dphi = np.radians(lat2 - lat1)
@@ -113,7 +113,7 @@ def add_movement(df: pd.DataFrame) -> pd.DataFrame:
     df["dt-seconds"] = g["timestamp-utc"].diff().dt.total_seconds()
     prev_lat = g["location-lat"].shift(1)
     prev_lon = g["location-long"].shift(1)
-    df["step-meters"] = _helper_haversine_m(
+    df["step-meters"] = haversine_m(
         prev_lat, prev_lon, df["location-lat"], df["location-long"]
     )
     df["derived-speed-ms"] = (df["step-meters"] / df["dt-seconds"]).where(
