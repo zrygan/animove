@@ -1,0 +1,439 @@
+<!--
+  ANIMOVE — Conference poster  (48in × 36in, landscape)
+  Clean navy + gold card system (per reference): dashed-bordered white
+  cards, rounded friendly headings, navy header band with gold rings,
+  gold authors bar, gold footer. Content & section order from the
+  group's structure; real data pulled from animove.ipynb.
+  ------------------------------------------------------------------
+  EDIT IN VSCODE
+  • Open in a browser to preview (auto-scales); prints at true 48"×36".
+  • Export PDF: Print ▸ Save as PDF ▸ paper 48×36 in, margins none.
+  • Replace any <div class="drop">…</div> with your matplotlib export:
+      <img src="figs/your_chart.png" alt="…" style="width:100%;border-radius:10px">
+    Each drop names its exact notebook source.
+  • --base on .poster = master type scale (all text em-relative).
+  • Colours live in :root.
+  ------------------------------------------------------------------
+-->
+<meta charset="utf-8">
+<title>Animove — Bobcat Movement Ecology · Conference Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  /* palette sampled from the bobcat / Black Rock Forest photo */
+  --navy:#3b3427;      /* dark olive-brown — header/footer bands, headings, strong text */
+  --navy-deep:#2d2820;
+  --ink:#383024;       /* body text on white                        */
+  --gold:#aca581;      /* sage-khaki — bars, rings, footer           */
+  --gold-line:#a49b74; /* muted khaki — dashed card borders          */
+  --paper:#ffffff;     /* card surface                              */
+  --bg:#efe9db;        /* warm light khaki — page field             */
+  --muted:#7c7663;     /* secondary text                            */
+  --rust:#9a7b3f;      /* bronze / fur-ochre — data accent           */
+  --male:#3f6d6a;      /* muted teal  */
+  --female:#9c5a6b;    /* muted rose  */
+  --line:rgba(59,52,39,.15);
+
+  --disp:'Poppins',system-ui,sans-serif;
+  --body:'Source Sans 3',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#d9d3c2;color:var(--ink);font-family:var(--body)}
+
+.stage{display:flex;justify-content:center;padding:24px}
+.poster{
+  --base:23px;
+  width:48in;height:36in;flex:none;background:var(--bg);
+  padding:.5in .55in;
+  display:grid;grid-template-rows:auto auto auto 1fr auto;gap:.3in;
+  font-size:var(--base);line-height:1.4;
+  box-shadow:0 .16in .5in rgba(38,37,79,.22);
+  position:relative;overflow:hidden;
+}
+
+/* bobcat watermark bottom-right */
+.watermark{position:absolute;bottom:.9in;right:.5in;width:7.5in;opacity:.05;fill:var(--navy);pointer-events:none}
+
+/* =====================  HEADER  ===================== */
+.hero{background:var(--navy);border-radius:16px;position:relative;overflow:hidden;
+  padding:.5in 3.4in .46in;text-align:center}
+.rings{position:absolute;top:50%;transform:translateY(-50%);width:2.9in;height:2.9in;opacity:.9}
+.rings.l{left:-.5in}.rings.r{right:-.5in}
+.rings circle{fill:none;stroke:var(--gold);stroke-width:6}
+.title{font-family:var(--disp);font-weight:700;font-size:2.35em;line-height:1.04;
+  text-transform:uppercase;letter-spacing:.005em;color:#f2ede0;position:relative;z-index:2}
+.title .sci{color:#c6bf99;text-transform:none;font-weight:600}
+.src-line{font-family:var(--body);font-size:.96em;color:#d9d3c1;margin-top:.14in;position:relative;z-index:2}
+.src-line b{color:#fff;font-weight:600}
+
+/* authors / affiliations gold bar */
+.abar{background:var(--gold);border-radius:14px;display:grid;grid-template-columns:1fr 1px 1fr;
+  align-items:center;padding:.22in .5in;text-align:center;gap:.4in}
+.abar .sep{background:rgba(47,46,110,.28);height:1.1in;width:1px}
+.abar .lab{font-family:var(--disp);font-weight:700;font-size:1.15em;color:var(--navy);
+  text-transform:uppercase;letter-spacing:.02em;margin-bottom:.03in}
+.abar .val{font-family:var(--body);font-size:1.02em;color:var(--navy-deep)}
+
+/* research-question full-width card */
+.rq{background:#fff;border:2px dashed var(--gold-line);border-radius:16px;text-align:center;
+  padding:.28in .7in}
+.rq .rq-lab{font-family:var(--disp);font-weight:700;font-size:.86em;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--gold-line);margin-bottom:.08in}
+.rq .rq-text{font-family:var(--body);font-style:italic;font-size:1.36em;line-height:1.3;color:var(--navy)}
+.rq .rq-text b{font-style:normal;font-weight:700;color:var(--rust)}
+
+/* =====================  BODY  ===================== */
+.body{display:grid;grid-template-columns:1fr 1.5fr 1.16fr;gap:.32in;min-height:0}
+.col{display:flex;flex-direction:column;gap:.28in;min-height:0}
+
+/* clean dashed card */
+.card{background:var(--paper);border:2px dashed var(--gold-line);border-radius:16px;
+  padding:.3in .34in .32in;box-shadow:0 2px 10px rgba(38,37,79,.05)}
+.card.grow{flex:1;display:flex;flex-direction:column}
+.card > h2{font-family:var(--disp);font-weight:700;font-size:1.42em;color:var(--navy);
+  text-align:center;line-height:1.06;margin-bottom:.18in}
+.card > h2 .ac{color:var(--rust)}
+
+h3{font-family:var(--disp);font-weight:600;font-size:1.06em;color:var(--navy);margin:.16in 0 .08in}
+h3:first-child{margin-top:0}
+p{margin-bottom:.12in;font-size:.96em}
+p:last-child{margin-bottom:0}
+.lead{font-size:1em;line-height:1.42}
+.sci{font-style:italic}.title .sci{font-style:normal}
+strong{font-weight:700;color:var(--navy)}
+.muted{color:var(--muted)}
+.num{font-family:var(--mono);font-weight:600;color:var(--rust)}
+
+/* bias / definition list */
+.defs{list-style:none}
+.defs li{position:relative;padding-left:.32in;margin-bottom:.11in;font-size:.9em;line-height:1.32}
+.defs li::before{content:"";position:absolute;left:.02in;top:.08in;width:.13in;height:.13in;
+  background:var(--gold);border:1.5px solid var(--gold-line);border-radius:3px;transform:rotate(45deg)}
+.defs .t{font-family:var(--disp);font-weight:600;color:var(--navy)}
+
+/* photo / chart drop-zone */
+.drop{border:2px dashed var(--line);border-radius:12px;
+  background:repeating-linear-gradient(45deg,rgba(59,52,39,.045) 0 16px,transparent 16px 32px);
+  padding:.26in;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  gap:.07in;text-align:center;flex:1;min-height:2in}
+.drop .ic{font-family:var(--mono);font-size:1.6em;color:var(--navy);opacity:.55}
+.drop .dt{font-family:var(--disp);font-weight:600;font-size:1em;color:var(--navy)}
+.drop .dd{font-family:var(--body);font-size:.82em;color:var(--muted);line-height:1.4;max-width:5in}
+.drop .ds{font-family:var(--mono);font-size:.74em;color:var(--rust);letter-spacing:.02em}
+.photo{min-height:3.5in}
+
+/* EDA question unit */
+.q{display:grid;grid-template-columns:auto 1fr;gap:.18in;align-items:start;margin:.18in 0 .12in}
+.q:first-of-type{margin-top:.1in}
+.q .qn{font-family:var(--disp);font-weight:700;font-size:1.3em;color:var(--rust);line-height:.9;
+  background:#eae6d5;border-radius:8px;padding:.06in .1in}
+.q .qt{font-family:var(--body);font-weight:600;font-size:1em;line-height:1.24;color:var(--navy)}
+.vardef{font-family:var(--mono);font-size:.76em;color:var(--muted);line-height:1.5;margin-top:.09in}
+.vardef b{color:var(--rust);font-weight:600}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:.22in}
+
+/* biological-profile table */
+.tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8em;
+  border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.tbl th{background:var(--navy);color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:.02em;
+  padding:.07in .1in;text-align:left;font-size:.92em}
+.tbl td{padding:.06in .1in;border-top:1px solid var(--line)}
+.tbl tr:nth-child(even) td{background:#f3efe3}
+.tbl td:first-child{font-weight:600;color:var(--navy)}
+.tbl .m{color:var(--male);font-weight:600}
+.tbl .f{color:var(--female);font-weight:600}
+.tbl-cap{font-family:var(--mono);font-size:.76em;color:var(--muted);margin-bottom:.07in}
+
+/* statistical test block */
+.test{border:1px solid var(--line);border-left:.09in solid var(--rust);border-radius:10px;
+  padding:.2in .24in;margin-bottom:.2in;background:#fcfcfe}
+.test:last-of-type{margin-bottom:.06in}
+.test .tn{font-family:var(--disp);font-weight:600;font-size:1.06em;color:var(--navy);line-height:1.1}
+.test .tn small{display:block;font-family:var(--mono);font-weight:400;font-size:.56em;
+  color:var(--rust);letter-spacing:.04em;margin-top:.03in;text-transform:none}
+.hyp{font-size:.86em;line-height:1.32;margin:.08in 0 0}
+.hyp .h{font-family:var(--mono);font-weight:600;color:var(--rust);margin-right:.05in}
+.result{margin-top:.12in;background:#eeeadd;border-radius:8px;padding:.11in .16in;
+  display:flex;align-items:center;gap:.16in;flex-wrap:wrap}
+.result .stat{font-family:var(--mono);font-weight:600;font-size:.92em;color:var(--navy)}
+.result .verdict{font-family:var(--disp);font-weight:600;font-size:.82em;text-transform:uppercase;
+  letter-spacing:.03em;color:var(--navy-deep);background:var(--gold);border-radius:5px;padding:.02in .13in}
+.tnote{font-size:.82em;color:var(--muted);line-height:1.3;margin-top:.08in}
+
+/* key findings */
+.kf{list-style:none;counter-reset:k}
+.kf li{counter-increment:k;position:relative;padding-left:.42in;margin-bottom:.12in;font-size:.9em;line-height:1.32}
+.kf li::before{content:counter(k);position:absolute;left:0;top:0;font-family:var(--mono);font-weight:600;
+  font-size:.78em;color:var(--navy);background:var(--gold);width:.32in;height:.32in;border-radius:50%;
+  display:grid;place-items:center}
+.kf b{color:var(--rust);font-weight:600}
+.caveat{background:#f1ecdc;border:1px solid var(--gold-line);border-radius:10px;padding:.16in .2in;margin-top:.14in}
+.caveat .ct{font-family:var(--disp);font-weight:600;font-size:.86em;text-transform:uppercase;
+  letter-spacing:.03em;color:var(--rust);margin-bottom:.05in}
+.caveat p{font-size:.84em;line-height:1.32;margin:0}
+
+/* footer band */
+.foot{background:var(--gold);border-radius:14px;padding:.18in .5in;
+  display:grid;grid-template-columns:2.6fr 1fr;gap:.5in;align-items:center}
+.refs{font-family:var(--mono);font-size:.72em;line-height:1.55;color:var(--navy-deep)}
+.refs b{color:var(--navy);font-weight:600}
+.foot-right{text-align:right;font-family:var(--mono);font-size:.72em;color:var(--navy-deep);line-height:1.6}
+.foot-right .bm{font-family:var(--disp);font-weight:700;font-size:1.35em;color:var(--navy)}
+
+@media print{
+  html,body{background:#fff}
+  .stage{padding:0;display:block}
+  .poster{box-shadow:none;transform:none!important}
+  @page{size:48in 36in;margin:0}
+}
+</style>
+
+<!-- reusable bobcat silhouette (prowling) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="bobcat" viewBox="0 0 220 130">
+  <path d="M8 96 C10 84 14 82 20 84 C18 74 22 66 30 64 L26 52 L34 60 L38 48 L44 60 C52 56 62 57 70 60
+    C86 52 104 50 120 54 C138 46 150 40 150 40 L146 26 L156 38 L162 22 L168 40 L176 30 L176 46
+    C186 52 196 62 200 76 C206 80 210 86 210 94 L204 94 C202 88 198 84 194 84 C196 92 194 100 188 104
+    L190 116 L182 110 L178 118 L172 108 C160 112 150 112 140 110 L142 120 L134 114 L130 122 L124 112
+    C104 114 84 112 66 104 C64 110 60 114 54 114 L56 122 L48 116 L44 122 L40 112
+    C28 110 18 106 12 100 Z"/>
+</symbol></svg>
+
+<div class="stage">
+<div class="poster">
+  <svg class="watermark"><use href="#bobcat"/></svg>
+
+  <!-- ========================= HEADER ========================= -->
+  <header class="hero">
+    <svg class="rings l" viewBox="0 0 100 100"><circle cx="50" cy="50" r="12"/><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="42"/></svg>
+    <svg class="rings r" viewBox="0 0 100 100"><circle cx="50" cy="50" r="12"/><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="42"/></svg>
+    <h1 class="title">Spatial Dynamics, Temporal Rhythms &amp; Biological Influences on
+      Bobcat <span class="sci">(Lynx&nbsp;rufus)</span> Movement Near Black Rock Forest, New York</h1>
+    <p class="src-line">using the Movebank dataset <b>“Carnivore movements near Black Rock Forest New York”</b> · LaPoint (2026)</p>
+  </header>
+
+  <!-- authors / affiliations -->
+  <div class="abar">
+    <div><div class="lab">Authors</div><div class="val">Zhean Robby Ganituen · Jaztin Jacob Jimenez · Reece Benedict Orense · Ashley Paulianna Reyes · Matthew Fraser Sim</div></div>
+    <div class="sep"></div>
+    <div><div class="lab">Affiliation</div><div class="val">De La Salle University · Manila &nbsp;|&nbsp; CSMODEL — Modeling &amp; Simulation</div></div>
+  </div>
+
+  <!-- research question -->
+  <section class="rq">
+    <div class="rq-lab">Research Question</div>
+    <p class="rq-text">How do spatial movement patterns, territorial boundaries, and activity levels vary
+      <b>among individual bobcats</b>, and how do <b>biological factors</b> — sex, mass, and life-stage —
+      shape these behaviors near Black Rock Forest, New York?</p>
+  </section>
+
+  <!-- ========================= BODY ========================= -->
+  <div class="body">
+
+    <!-- =============== COLUMN 1 =============== -->
+    <div class="col">
+      <div class="card">
+        <h2>Introduction</h2>
+        <p class="lead">We investigate the spatial, temporal, and biological drivers of bobcat
+          <span class="sci">(Lynx rufus)</span> movement near Black Rock Forest, New York, using high-frequency
+          GPS telemetry and biological metadata collected <strong>2020–2026</strong>. We profile individual
+          activity budgets, circadian rhythms, and territories, then apply density-based behavioral clustering
+          <strong>(HDBSCAN)</strong> and temporal feature engineering to relate biological traits to behavior.</p>
+      </div>
+
+      <div class="card">
+        <div class="drop photo">
+          <div class="ic">◨</div>
+          <div class="dt">Bobcat <span class="sci">(Lynx rufus)</span> — field photo</div>
+          <div class="dd">Drop a subject or collared-individual image here.</div>
+          <div class="ds">→ figs/bobcat.jpg</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Data &amp; <span class="ac">Preprocessing</span></h2>
+        <ul class="kf">
+          <li><b>Filter</b> to <span class="sci">Lynx rufus</span>, dropping <span class="sci">Pekania pennanti</span> (fishers).</li>
+          <li><b>De-noise</b> GPS via quality flags, outlier marks &amp; fix-type screening.</li>
+          <li><b>Bound</b> fixes to each collar's valid deploy-on → deploy-off window.</li>
+          <li><b>Clean</b> missing values &amp; duplicates, then <b>engineer</b> local time &amp; seasonality.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Potential <span class="ac">Biases</span></h2>
+        <ul class="defs">
+          <li><span class="t">Small sample.</span> 100k+ pings but only <span class="num">n = 7</span> individuals — trends describe this local sample, not the species.</li>
+          <li><span class="t">Autocorrelation.</span> Successive fixes from one collar are not statistically independent.</li>
+          <li><span class="t">Capture bias.</span> Trap-shy individuals — potentially different in behavior — are absent by design.</li>
+          <li><span class="t">Signal loss.</span> Dense canopy, terrain &amp; weather block GPS, producing missed or noisy fixes.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Key Findings &amp; <span class="ac">Conclusions</span></h2>
+        <ul class="kf">
+          <li>Movement, activity &amp; territory vary <b>by individual, not just category</b>: <span class="num">LYRU_0008</span> is fastest (~0.5&nbsp;m/s) &amp; ranges widest; juvenile <span class="num">LYRU_0003</span> is slowest with a small range.</li>
+          <li>All cats share one <b>right-skewed</b> speed shape and one <b>crepuscular rhythm</b> — active at dawn &amp; dusk, resting midday.</li>
+          <li>Territories show <b>same-sex partitioning</b>; the lone cross-sex overlap suggests courtship.</li>
+          <li>Biology bends behavior: <b>males ~50% faster</b> than females; speed rises from juvenile → adult.</li>
+        </ul>
+        <div class="caveat">
+          <div class="ct">Read directionally</div>
+          <p>Few males were tracked, and two individuals account for <strong>~96%</strong> of all male fixes — sex &amp;
+            life-stage effects may partly reflect <strong>which cats</strong> were tracked, not the species at large.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- =============== COLUMN 2 — EDA =============== -->
+    <div class="col">
+      <div class="card grow">
+        <h2>Exploratory <span class="ac">Data Analysis</span></h2>
+        <p class="muted" style="font-size:.9em;text-align:center;margin-bottom:.06in">
+          <strong style="color:var(--rust)">Data scope:</strong> 131,930 raw merged fixes (49 variables) →
+          <strong>112,232 cleaned</strong> <span class="sci">Lynx rufus</span> observations · <strong>7 bobcats</strong></p>
+
+        <!-- Q1 -->
+        <div class="q"><span class="qn">Q1</span><span class="qt">What is the distribution of tracking data across bobcats, and what are their biological profiles?</span></div>
+        <div class="split">
+          <div class="drop" style="min-height:2.3in">
+            <div class="ic">▤</div><div class="dt">Avg. locations / day</div>
+            <div class="dd">Per-cat fixes normalized by tracking duration.</div>
+            <div class="ds">→ EDA #1 bar</div>
+          </div>
+          <div>
+            <div class="tbl-cap">Biological profiles</div>
+            <table class="tbl">
+              <thead><tr><th>animal-id</th><th>sex</th><th>mass&nbsp;(g)</th><th>life-stage</th></tr></thead>
+              <tbody>
+                <tr><td>LYRU_0001</td><td class="f">f</td><td>6300</td><td>adult</td></tr>
+                <tr><td>LYRU_0002</td><td class="f">f</td><td>7200</td><td>subadult</td></tr>
+                <tr><td>LYRU_0003</td><td class="f">f</td><td>5000</td><td>juvenile</td></tr>
+                <tr><td>LYRU_0004</td><td class="m">m</td><td>8000</td><td>juvenile</td></tr>
+                <tr><td>LYRU_0005</td><td class="f">f</td><td>5400</td><td>juvenile</td></tr>
+                <tr><td>LYRU_0006</td><td class="f">f</td><td>6700</td><td>subadult</td></tr>
+                <tr><td>LYRU_0008</td><td class="m">m</td><td>11400</td><td>adult</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="q"><span class="qn">Q2</span><span class="qt">How do general activity levels and ground speeds vary among individual bobcats?</span></div>
+        <div class="drop" style="min-height:2in">
+          <div class="ic">⊟</div><div class="dt">Distribution of ground speeds (log scale)</div>
+          <div class="dd">Per-cat box plots — every cat is strongly right-skewed: long rests, rare high-speed bursts.</div>
+          <div class="ds">→ EDA #2 box plot</div>
+        </div>
+        <div class="vardef"><b>ground-speed</b> — sensor movement velocity (m/s) &nbsp;·&nbsp; <b>animal-id</b> — per-cat identifier (LYRU_000X)</div>
+
+        <!-- Q3 -->
+        <div class="q"><span class="qn">Q3</span><span class="qt">Where are the territorial boundaries of these bobcats, and do their home ranges overlap?</span></div>
+        <div class="split">
+          <div class="drop" style="min-height:2.2in"><div class="ic">◈</div><div class="dt">Home ranges by individual</div><div class="ds">→ EDA #3a map</div></div>
+          <div class="drop" style="min-height:2.2in"><div class="ic">◈</div><div class="dt">Overlap by sex</div><div class="ds">→ EDA #3b map</div></div>
+        </div>
+        <div class="vardef"><b>location-lat / location-long</b> — decimal-degree coordinates of each GPS fix</div>
+
+        <!-- Q4 -->
+        <div class="q"><span class="qn">Q4</span><span class="qt">Do all bobcats share the same daily rhythm, or hunt / rest at different times?</span></div>
+        <div class="drop" style="min-height:2in">
+          <div class="ic">⋀</div><div class="dt">Local hourly activity patterns</div>
+          <div class="dd">Mean ground-speed per hour — all reliable cats peak 04–08h &amp; 16–19h, dip midday.</div>
+          <div class="ds">→ EDA #4 line plot</div>
+        </div>
+        <div class="vardef"><b>timestamp</b> — fix date-time, converted to local hour &amp; season in feature engineering</div>
+      </div>
+    </div>
+
+    <!-- =============== COLUMN 3 — MINING + STATS =============== -->
+    <div class="col">
+      <div class="card">
+        <h2>Behavioral States · <span class="ac">Data Mining</span></h2>
+        <p style="font-size:.9em"><strong>HDBSCAN</strong> density clustering (Campello et&nbsp;al., 2015) segments every
+          fix by its kinematics into <strong style="color:var(--rust)">Resting · Foraging · Traveling</strong>,
+          recovering each cat's activity budget — a structure the raw data never labels.</p>
+        <div class="split" style="margin-top:.14in">
+          <div class="drop" style="min-height:2.1in"><div class="ic">⁛</div><div class="dt">Discovered states</div><div class="dd">HDBSCAN on log-speed × log-step.</div><div class="ds">→ §5 scatter</div></div>
+          <div class="drop" style="min-height:2.1in"><div class="ic">▥</div><div class="dt">Activity budget / cat</div><div class="dd">0001 rests 61%; others forage 67–87%.</div><div class="ds">→ §5 stacked bars</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Statistical <span class="ac">Inference</span></h2>
+        <p class="muted" style="font-size:.86em;margin-bottom:.14in">Ground-speed is strongly right-skewed, so we use
+          <strong style="color:var(--navy)">non-parametric, rank-based tests</strong> that resist outlier sprints.</p>
+
+        <div class="test">
+          <div class="tn">Behavioral state vs. time of day<small>χ² Test of Independence · df = 4</small></div>
+          <p class="hyp"><span class="h">H₀</span>State is independent of time-of-day period.</p>
+          <p class="hyp"><span class="h">H₁</span>State is associated with time-of-day period.</p>
+          <div class="result"><span class="stat">χ² = 51.3 · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
+          <p class="tnote">Traveling concentrates in crepuscular hours (04–08h &amp; 16–19h).</p>
+        </div>
+
+        <div class="test">
+          <div class="tn">Ground-speed by biological sex<small>Mann–Whitney U Test</small></div>
+          <p class="hyp"><span class="h">H₀</span>Speed distributions are equal for males &amp; females.</p>
+          <p class="hyp"><span class="h">H₁</span>Speed distributions differ by sex.</p>
+          <div class="result"><span class="stat">0.33 vs 0.22 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
+          <p class="tnote">Males move ~50% faster at the median.</p>
+        </div>
+
+        <div class="test">
+          <div class="tn">Ground-speed across life-stages<small>Kruskal–Wallis H Test</small></div>
+          <p class="hyp"><span class="h">H₀</span>Speed is equal across juvenile / subadult / adult.</p>
+          <p class="hyp"><span class="h">H₁</span>At least one life-stage differs.</p>
+          <div class="result"><span class="stat">0.20 / 0.25 / 0.26 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
+          <p class="tnote">Speed rises with age — competency develops, not fixed from birth.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="ac">Recommendations</span></h2>
+        <ul class="kf">
+          <li><b>Correct for collar age.</b> Fix-success confounds with battery &amp; deployment length — don't read raw ping density as an activity proxy.</li>
+          <li><b>Leverage known territories</b> &amp; dawn/dusk peaks when designing future carnivore or prey studies in the forest.</li>
+          <li><b>Sample balanced by sex &amp; life-stage</b> so future work can separate genuine patterns from tracked-individual artifacts.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================= FOOTER ========================= -->
+  <footer class="foot">
+    <div class="refs">
+      <b>References ·</b> LaPoint, S. (2026). <span class="sci">Carnivore movements near Black Rock Forest New York</span> [dataset]. Movebank Data Repository. &nbsp;·&nbsp;
+      Oliver, R. Y. et&nbsp;al. (2026). Interacting effects of human presence and landscape modification on birds and mammals. <span class="sci">Science, 392</span>(6800), 879–884. &nbsp;·&nbsp;
+      Campello, R. J. G. B. et&nbsp;al. (2015). Hierarchical density estimates for data clustering, visualization &amp; outlier detection. <span class="sci">ACM TKDD.</span><br>
+      <span style="color:var(--rust)">Generative AI — used for grammar checking &amp; code assistance; all analysis &amp; interpretation by the authors.</span>
+    </div>
+    <div class="foot-right">
+      <div class="bm">ANIMOVE</div>
+      <div>De La Salle University · CSMODEL</div>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+<script>
+/* Fit the true-size 48"×36" poster into the window for on-screen preview.
+   Print / PDF export renders at full scale (see @media print). */
+(function(){
+  var stage=document.querySelector('.stage'), poster=document.querySelector('.poster');
+  function fit(){
+    if(window.matchMedia('print').matches){poster.style.transform='none';return;}
+    var pad=48, scale=Math.min((window.innerWidth-pad)/poster.offsetWidth,1);
+    poster.style.transform='scale('+scale+')';
+    poster.style.transformOrigin='top center';
+    stage.style.height=(poster.offsetHeight*scale+pad)+'px';
+  }
+  window.addEventListener('resize',fit); window.addEventListener('load',fit); fit();
+})();
+</script>
