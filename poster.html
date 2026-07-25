@@ -1,5 +1,5 @@
 <!--
-  ANIMOVE — Conference poster  (48in × 36in, landscape)
+  ANIMOVE - Conference poster  (48in × 36in, landscape)
   Clean navy + gold card system (per reference): dashed-bordered white
   cards, rounded friendly headings, navy header band with gold rings,
   gold authors bar, gold footer. Content & section order from the
@@ -16,7 +16,7 @@
   ------------------------------------------------------------------
 -->
 <meta charset="utf-8">
-<title>Animove — Bobcat Movement Ecology · Conference Poster</title>
+<title>Animove · Bobcat Movement Ecology · Conference Poster</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -24,15 +24,15 @@
 <style>
 :root{
   /* palette sampled from the bobcat / Black Rock Forest photo */
-  --navy:#3b3427;      /* dark olive-brown — header/footer bands, headings, strong text */
+  --navy:#3b3427;      /* dark olive-brown - header/footer bands, headings, strong text */
   --navy-deep:#2d2820;
   --ink:#383024;       /* body text on white                        */
-  --gold:#aca581;      /* sage-khaki — bars, rings, footer           */
-  --gold-line:#a49b74; /* muted khaki — dashed card borders          */
+  --gold:#aca581;      /* sage-khaki - bars, rings, footer           */
+  --gold-line:#a49b74; /* muted khaki - dashed card borders          */
   --paper:#ffffff;     /* card surface                              */
-  --bg:#efe9db;        /* warm light khaki — page field             */
+  --bg:#efe9db;        /* warm light khaki - page field             */
   --muted:#7c7663;     /* secondary text                            */
-  --rust:#9a7b3f;      /* bronze / fur-ochre — data accent           */
+  --rust:#9a7b3f;      /* bronze / fur-ochre - data accent           */
   --male:#3f6d6a;      /* muted teal  */
   --female:#9c5a6b;    /* muted rose  */
   --line:rgba(59,52,39,.15);
@@ -47,10 +47,10 @@ html,body{background:#d9d3c2;color:var(--ink);font-family:var(--body)}
 
 .stage{display:flex;justify-content:center;padding:24px}
 .poster{
-  --base:23px;
+  --base:28px;
   width:48in;height:36in;flex:none;background:var(--bg);
-  padding:.5in .55in;
-  display:grid;grid-template-rows:auto auto auto 1fr auto;gap:.3in;
+  padding:.42in .5in;
+  display:grid;grid-template-rows:auto auto auto 1fr auto;gap:.24in;
   font-size:var(--base);line-height:1.4;
   box-shadow:0 .16in .5in rgba(38,37,79,.22);
   position:relative;overflow:hidden;
@@ -61,7 +61,7 @@ html,body{background:#d9d3c2;color:var(--ink);font-family:var(--body)}
 
 /* =====================  HEADER  ===================== */
 .hero{background:var(--navy);border-radius:16px;position:relative;overflow:hidden;
-  padding:.5in 3.4in .46in;text-align:center}
+  padding:.4in 3.4in .36in;text-align:center}
 .rings{position:absolute;top:50%;transform:translateY(-50%);width:2.9in;height:2.9in;opacity:.9}
 .rings.l{left:-.5in}.rings.r{right:-.5in}
 .rings circle{fill:none;stroke:var(--gold);stroke-width:6}
@@ -73,7 +73,7 @@ html,body{background:#d9d3c2;color:var(--ink);font-family:var(--body)}
 
 /* authors / affiliations gold bar */
 .abar{background:var(--gold);border-radius:14px;display:grid;grid-template-columns:1fr 1px 1fr;
-  align-items:center;padding:.22in .5in;text-align:center;gap:.4in}
+  align-items:center;padding:.17in .5in;text-align:center;gap:.4in}
 .abar .sep{background:rgba(47,46,110,.28);height:1.1in;width:1px}
 .abar .lab{font-family:var(--disp);font-weight:700;font-size:1.15em;color:var(--navy);
   text-transform:uppercase;letter-spacing:.02em;margin-bottom:.03in}
@@ -81,19 +81,19 @@ html,body{background:#d9d3c2;color:var(--ink);font-family:var(--body)}
 
 /* research-question full-width card */
 .rq{background:#fff;border:2px dashed var(--gold-line);border-radius:16px;text-align:center;
-  padding:.28in .7in}
+  padding:.22in .7in}
 .rq .rq-lab{font-family:var(--disp);font-weight:700;font-size:.86em;letter-spacing:.22em;
   text-transform:uppercase;color:var(--gold-line);margin-bottom:.08in}
 .rq .rq-text{font-family:var(--body);font-style:italic;font-size:1.36em;line-height:1.3;color:var(--navy)}
 .rq .rq-text b{font-style:normal;font-weight:700;color:var(--rust)}
 
 /* =====================  BODY  ===================== */
-.body{display:grid;grid-template-columns:1fr 1.72fr 1.18fr;gap:.32in;min-height:0}
-.col{display:flex;flex-direction:column;gap:.26in;min-height:0}
+.body{display:grid;grid-template-columns:1fr 1.72fr 1.18fr;gap:.3in;min-height:0}
+.col{display:flex;flex-direction:column;gap:.22in;min-height:0}
 
 /* clean dashed card */
 .card{background:var(--paper);border:2px dashed var(--gold-line);border-radius:16px;
-  padding:.3in .34in .32in;box-shadow:0 2px 10px rgba(38,37,79,.05)}
+  padding:.25in .3in .27in;box-shadow:0 2px 10px rgba(38,37,79,.05)}
 .card.grow{flex:1;display:flex;flex-direction:column}
 /* ---- column-filling helpers ------------------------------------------
    Columns 1 and 3 are shorter than column 2, so their picture and list
@@ -148,31 +148,35 @@ strong{font-weight:700;color:var(--navy)}
 .fig.fill{aspect-ratio:auto;flex:1 1 0;min-height:1.6in}
 
 /* short read-this-graph note printed under every figure */
-.note{font-size:.83em;line-height:1.35;margin-top:.1in}
+.note{font-size:.9em;line-height:1.34;margin-top:.1in}
 .note .nl{font-family:var(--disp);font-weight:600;color:var(--rust);margin-right:.04in}
 .note b{font-weight:600;color:var(--navy)}
 .note .id{font-family:var(--mono);font-size:.94em;color:var(--rust)}
 
-/* dataset-at-a-glance stat grid */
-.stats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.13in .2in}
-.stats li{border-left:.05in solid var(--gold);padding-left:.13in;line-height:1.15}
-.stats .sv{display:block;font-family:var(--mono);font-weight:600;font-size:1.12em;color:var(--rust)}
-.stats .sk{display:block;font-size:.8em;color:var(--muted);line-height:1.28;margin-top:.02in}
-
 /* EDA question unit */
-.q{display:grid;grid-template-columns:auto 1fr;gap:.18in;align-items:start;margin:.18in 0 .12in}
-.q:first-of-type{margin-top:.1in}
+.q{display:grid;grid-template-columns:auto 1fr;gap:.18in;align-items:start;margin:.12in 0 .07in}
+.q:first-of-type{margin-top:.06in}
 .q .qn{font-family:var(--disp);font-weight:700;font-size:1.3em;color:var(--rust);line-height:.9;
   background:#eae6d5;border-radius:8px;padding:.06in .1in}
 .q .qt{font-family:var(--body);font-weight:600;font-size:1em;line-height:1.24;color:var(--navy)}
-.vardef{font-family:var(--mono);font-size:.76em;color:var(--muted);line-height:1.5;margin-top:.09in}
+.vardef{font-family:var(--mono);font-size:.84em;color:var(--muted);line-height:1.45;margin-top:.09in}
 .vardef b{color:var(--rust);font-weight:600}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:.22in}
-/* graph + its explanation side by side — the graph keeps the lion's share */
-.split.fig-note{grid-template-columns:1.6fr 1fr}
+/* figure stacked above its own explanation, inside one .split cell */
+.figcell{display:flex;flex-direction:column}
+/* ---- row balancing ---------------------------------------------------
+   A .split row is as tall as its tallest cell, so a wide-format figure
+   paired with a short note leaves dead space beside the text. These
+   ratios trade width from the figure to the note until the two cells
+   come out close to the same height - no gaps, no wasted column inches. */
+.split.note-wide{grid-template-columns:.8fr 1.2fr}
+.split.table-wide{grid-template-columns:1fr 1.05fr}
+/* graph + its explanation side by side; the graph keeps the lion's share,
+   sized so the note runs almost the full height of the figure beside it */
+.split.fig-note{grid-template-columns:1.85fr 1fr}
 
 /* biological-profile table */
-.tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8em;
+.tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.86em;
   border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .tbl th{background:var(--navy);color:#fff;font-weight:600;text-transform:uppercase;letter-spacing:.02em;
   padding:.07in .1in;text-align:left;font-size:.92em}
@@ -185,7 +189,7 @@ strong{font-weight:700;color:var(--navy)}
 
 /* statistical test block */
 .test{border:1px solid var(--line);border-left:.09in solid var(--rust);border-radius:10px;
-  padding:.2in .24in;margin-bottom:.2in;background:#fcfcfe}
+  padding:.15in .2in;margin-bottom:.15in;background:#fcfcfe}
 .test:last-of-type{margin-bottom:.06in}
 .test .tn{font-family:var(--disp);font-weight:600;font-size:1.06em;color:var(--navy);line-height:1.1}
 .test .tn small{display:block;font-family:var(--mono);font-weight:400;font-size:.56em;
@@ -214,9 +218,9 @@ strong{font-weight:700;color:var(--navy)}
 /* footer band */
 .foot{background:var(--gold);border-radius:14px;padding:.18in .5in;
   display:grid;grid-template-columns:2.6fr 1fr;gap:.5in;align-items:center}
-.refs{font-family:var(--mono);font-size:.72em;line-height:1.55;color:var(--navy-deep)}
+.refs{font-family:var(--mono);font-size:.8em;line-height:1.5;color:var(--navy-deep)}
 .refs b{color:var(--navy);font-weight:600}
-.foot-right{text-align:right;font-family:var(--mono);font-size:.72em;color:var(--navy-deep);line-height:1.6}
+.foot-right{text-align:right;font-family:var(--mono);font-size:.8em;color:var(--navy-deep);line-height:1.6}
 .foot-right .bm{font-family:var(--disp);font-weight:700;font-size:1.35em;color:var(--navy)}
 
 @media print{
@@ -254,14 +258,14 @@ strong{font-weight:700;color:var(--navy)}
   <div class="abar">
     <div><div class="lab">Authors</div><div class="val">Zhean Robby Ganituen · Jaztin Jacob Jimenez · Reece Benedict Orense · Ashley Paulianna Reyes · Matthew Fraser Sim</div></div>
     <div class="sep"></div>
-    <div><div class="lab">Affiliation</div><div class="val">De La Salle University · Manila &nbsp;|&nbsp; CSMODEL — Modeling &amp; Simulation</div></div>
+    <div><div class="lab">Affiliation</div><div class="val">De La Salle University · Manila &nbsp;|&nbsp; CSMODEL: Modeling &amp; Simulation</div></div>
   </div>
 
   <!-- research question -->
   <section class="rq">
     <div class="rq-lab">Research Question</div>
     <p class="rq-text">How do spatial movement patterns, territorial boundaries, and activity levels vary
-      <b>among individual bobcats</b>, and how do <b>biological factors</b> — sex, mass, and life-stage —
+      <b>among individual bobcats</b>, and how do <b>biological factors</b> such as sex, mass, and life-stage
       shape these behaviors near Black Rock Forest, New York?</p>
   </section>
 
@@ -284,15 +288,23 @@ strong{font-weight:700;color:var(--navy)}
       </div>
 
       <div class="card">
-        <h2>Dataset at a <span class="ac">Glance</span></h2>
-        <ul class="stats">
-          <li><span class="sv">112,232</span><span class="sk">cleaned <span class="sci">Lynx rufus</span> fixes (from 131,930 raw)</span></li>
-          <li><span class="sv">7</span><span class="sk">collared individuals · 2020–2026</span></li>
-          <li><span class="sv">~2 min</span><span class="sk">median interval between fixes</span></li>
-          <li><span class="sv">3–261 d</span><span class="sk">range of collar deployment lengths</span></li>
-          <li><span class="sv">~78%</span><span class="sk">of all fixes come from just two cats</span></li>
-          <li><span class="sv">1 of 7</span><span class="sk">cats tracked across all four seasons</span></li>
-        </ul>
+        <h2>About the <span class="ac">Dataset</span></h2>
+        <p>Seven wild bobcats living around <strong>Black Rock Forest</strong>, a research forest in New York's
+          Hudson Highlands, were fitted with <strong>GPS collars</strong>. Every couple of minutes a collar saved
+          a time-stamped dot on the map, along with how fast the animal was moving and which way it was headed.
+          Those dots are our data. A second file records who each cat was: male or female, how heavy, how old,
+          and the dates its collar was switched on and off. The study, published on Movebank, holds
+          <strong>131,930 recorded points</strong>; once we drop the faulty readings and the other species in it,
+          we are left with <strong>112,232 points from 7 bobcats</strong>, gathered between
+          <strong>2020 and 2026</strong>. One cat wore a collar for just 3 days, another for 261.</p>
+        <div class="caveat">
+          <div class="ct">What we set out to do</div>
+          <p>A collar tells you <strong>where</strong> an animal was. It never tells you <strong>what it was
+            doing</strong>. Working only from the dots, we wanted to know how fast each bobcat normally moves,
+            which hours of the day it is busy, how much ground it treats as home, whether being male or female
+            (or heavier, or younger) changes any of that, and finally to sort every single point into
+            <strong>resting, foraging or traveling</strong>.</p>
+        </div>
       </div>
 
       <div class="card">
@@ -308,9 +320,9 @@ strong{font-weight:700;color:var(--navy)}
       <div class="card spread">
         <h2>Potential <span class="ac">Biases</span></h2>
         <ul class="defs">
-          <li><span class="t">Small sample.</span> 100k+ pings but only <span class="num">n = 7</span> individuals — trends describe this local sample, not the species.</li>
+          <li><span class="t">Small sample.</span> 100k+ pings but only <span class="num">n = 7</span> individuals, so trends describe this local sample, not the species.</li>
           <li><span class="t">Autocorrelation.</span> Successive fixes from one collar are not statistically independent.</li>
-          <li><span class="t">Capture bias.</span> Trap-shy individuals — potentially different in behavior — are absent by design.</li>
+          <li><span class="t">Capture bias.</span> Trap-shy individuals, potentially different in behavior, are absent by design.</li>
           <li><span class="t">Signal loss.</span> Dense canopy, terrain &amp; weather block GPS, producing missed or noisy fixes.</li>
         </ul>
       </div>
@@ -319,19 +331,19 @@ strong{font-weight:700;color:var(--navy)}
         <h2>Key Findings &amp; <span class="ac">Conclusions</span></h2>
         <ul class="kf">
           <li>Movement, activity &amp; territory vary <b>by individual, not just category</b>: <span class="num">LYRU_0008</span> is fastest (~0.5&nbsp;m/s) &amp; ranges widest; juvenile <span class="num">LYRU_0003</span> is slowest with a small range.</li>
-          <li>All cats share one <b>right-skewed</b> speed shape and one <b>crepuscular rhythm</b> — active at dawn &amp; dusk, resting midday.</li>
+          <li>All cats share one <b>right-skewed</b> speed shape and one <b>crepuscular rhythm</b>: active at dawn &amp; dusk, resting midday.</li>
           <li>Territories show <b>same-sex partitioning</b>; the lone cross-sex overlap suggests courtship.</li>
           <li>Biology bends behavior: <b>males ~50% faster</b> than females; speed rises from juvenile → adult.</li>
         </ul>
         <div class="caveat">
           <div class="ct">Read directionally</div>
-          <p>Few males were tracked, and two individuals account for <strong>~96%</strong> of all male fixes — sex &amp;
+          <p>Few males were tracked, and two individuals account for <strong>~96%</strong> of all male fixes, so sex &amp;
             life-stage effects may partly reflect <strong>which cats</strong> were tracked, not the species at large.</p>
         </div>
       </div>
     </div>
 
-    <!-- =============== COLUMN 2 — EDA =============== -->
+    <!-- =============== COLUMN 2 - EDA =============== -->
     <div class="col">
       <div class="card grow">
         <h2>Exploratory <span class="ac">Data Analysis</span></h2>
@@ -341,7 +353,7 @@ strong{font-weight:700;color:var(--navy)}
 
         <!-- Q1 -->
         <div class="q"><span class="qn">Q1</span><span class="qt">What is the distribution of tracking data across bobcats, and what are their biological profiles?</span></div>
-        <div class="split">
+        <div class="split table-wide">
           <div class="fig" style="--ar:1.70"><img src="figures/01_average_locations_per_day.jpg" alt="Average locations logged per day, per bobcat"></div>
           <div>
             <div class="tbl-cap">Biological profiles</div>
@@ -358,89 +370,103 @@ strong{font-weight:700;color:var(--navy)}
               </tbody>
             </table>
             <p class="note"><span class="nl">Reading it:</span> Males outweigh the females of the same life stage, but
-              body mass does <b>not</b> predict how much data a collar returns — <span class="id">LYRU_0006</span> logs the
+              body mass does <b>not</b> predict how much data a collar returns: <span class="id">LYRU_0006</span> logs the
               most fixes per day (~208) while <span class="id">LYRU_0001</span>, tracked longest at 261 days, logs the
               fewest (~101). Deployments ran <b>3–261 days</b>, so this bar chart mostly measures collar battery life and
               canopy interference; it is a <b>fix-success</b> plot, not an activity plot.</p>
-            <div class="vardef"><b>animal-sex · animal-mass · animal-life-stage</b> — capture metadata &nbsp;·&nbsp; <b>animal-id</b> — per-cat identifier</div>
+            <div class="vardef"><b>animal-sex · animal-mass · animal-life-stage</b>: capture metadata &nbsp;·&nbsp; <b>animal-id</b>: per-cat identifier</div>
           </div>
         </div>
 
         <!-- Q2 -->
         <div class="q"><span class="qn">Q2</span><span class="qt">How do general activity levels and ground speeds vary among individual bobcats?</span></div>
-        <div class="split">
+        <div class="split note-wide">
           <div class="fig" style="--ar:2.10"><img src="figures/02_distribution_of_ground_speeds.jpg" alt="Distribution of ground speeds per bobcat, log scale"></div>
           <div>
             <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> Raw speeds were so right-skewed that
-              the boxes collapsed onto zero, so the axis is <b>log-scaled</b>. Every cat keeps the same shape — long
-              stretches near 0 m/s with a tail of sprint outliers — confirming a <b>shared movement ecology</b>.
+              the boxes collapsed onto zero, so the axis is <b>log-scaled</b>. Every cat keeps the same shape, long
+              stretches near 0 m/s with a tail of sprint outliers, confirming a <b>shared movement ecology</b>.
               What differs is the typical pace: <span class="id">LYRU_0008</span> is the most active (median
               <b>~0.50 m/s</b>, widest IQR), the juvenile <span class="id">LYRU_0003</span> the least
               (<b>~0.18 m/s</b>) yet it owns the single most extreme sprint; the other five sit between
-              0.24 and 0.29 m/s.</p>
-            <div class="vardef"><b>ground-speed</b> — sensor movement velocity (m/s), log-scaled here</div>
+              0.24 and 0.29 m/s. Because each distribution is one long right tail rather than two separate
+              modes, no cat is simply "fast" or "slow"; what varies is <b>how often</b> an individual leaves
+              its near-zero resting state. Medians therefore describe habitual pace and the whiskers describe
+              rare bursts, which is why the tests in the right-hand column are <b>rank-based</b>.</p>
+            <div class="vardef"><b>ground-speed</b>: sensor movement velocity (m/s), log-scaled here</div>
           </div>
         </div>
 
         <!-- Q3 -->
         <div class="q"><span class="qn">Q3</span><span class="qt">Where are the territorial boundaries of these bobcats, and do their home ranges overlap?</span></div>
         <div class="split">
-          <div class="fig" style="--ar:1.50"><img src="figures/03_home_ranges_by_individual.jpg" alt="Bobcat home ranges by individual"></div>
-          <div class="fig" style="--ar:1.50"><img src="figures/04_home_ranges_by_sex.jpg" alt="Bobcat home range overlaps by sex"></div>
+          <div class="figcell">
+            <div class="fig" style="--ar:1.50"><img src="figures/03_home_ranges_by_individual.jpg" alt="Bobcat home ranges by individual"></div>
+            <p class="note"><span class="nl">Reading it:</span> Each cat's fixes form a <b>bounded, structured home
+              range</b>: a dense web of linear tracks rather than one diffuse cloud. Footprints differ by an order of magnitude:
+              <span class="id">LYRU_0005</span> / <span class="id">LYRU_0006</span> stay inside ~1 km², while
+              <span class="id">LYRU_0004</span> / <span class="id">LYRU_0008</span> cover <b>&gt;11 km N–S and &gt;14 km E–W</b>.
+              Heavy orange / green / blue saturation is the sampling skew, not extra activity.</p>
+          </div>
+          <div class="figcell">
+            <div class="fig" style="--ar:1.50"><img src="figures/04_home_ranges_by_sex.jpg" alt="Bobcat home range overlaps by sex"></div>
+            <p class="note"><span class="nl">Reading it:</span> Recoloured by sex, the same ranges sit <b>side by side rather
+              than on top of each other</b> (<b>intrasexual exclusion</b>, which limits resource competition). The adult male
+              <span class="id">LYRU_0008</span> holds the higher latitudes and only briefly dips into female territory, the
+              pattern expected of a solitary carnivore that meets others mainly to mate.</p>
+          </div>
         </div>
-        <p class="note"><span class="nl">Reading it:</span> The fixes form <b>bounded, structured home ranges</b> — dense
-          linear track webs — rather than one diffuse cloud, and same-sex ranges sit side by side rather than on top of each
-          other (<b>intrasexual exclusion</b>, which limits resource competition). The adult male
-          <span class="id">LYRU_0008</span> holds the higher latitudes and only briefly dips into female territory, the
-          pattern expected of a solitary carnivore meeting only to mate. Footprints differ by an order of magnitude:
-          <span class="id">LYRU_0005</span> / <span class="id">LYRU_0006</span> stay inside ~1 km², while
-          <span class="id">LYRU_0004</span> / <span class="id">LYRU_0008</span> cover <b>&gt;11 km N–S and &gt;14 km E–W</b>.
-          The heavy orange / green / blue saturation is the sampling skew, not extra activity.</p>
-        <div class="vardef"><b>location-lat / location-long</b> — decimal-degree coordinates of each GPS fix</div>
+        <div class="vardef"><b>location-lat / location-long</b>: decimal-degree coordinates of each GPS fix</div>
 
         <!-- Q4 -->
         <div class="q"><span class="qn">Q4</span><span class="qt">Do all bobcats share the same daily rhythm, or hunt / rest at different times?</span></div>
-        <div class="split">
+        <div class="split note-wide">
           <div class="fig" style="--ar:2.25"><img src="figures/05_local_hourly_activity_patterns.jpg" alt="Local hourly activity patterns per bobcat"></div>
           <div>
             <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> <b>Timing is shared; amplitude is
               individual.</b> Pooled mean speed is <b>0.43 m/s</b> across both crepuscular windows (04–08h and 16–19h)
-              against <b>0.34 m/s</b> at midday — a ~21% dip — and the curves move together (mean pairwise correlation
+              against <b>0.34 m/s</b> at midday, a ~21% dip, and the curves move together (mean pairwise correlation
               <b>0.41</b>). <span class="id">LYRU_0001</span>–<span class="id">LYRU_0003</span> peak at dawn (06–08h)
               while the adult male <span class="id">LYRU_0008</span> peaks at dusk (18h) and runs fastest all day.
               <span class="id">LYRU_0002</span> is nearly flat (amplitude 0.11 m/s); the jagged
               <span class="id">LYRU_0005</span> / <span class="id">LYRU_0006</span> lines rest on only 362–467 fixes and
-              should not be over-read.</p>
-            <div class="vardef"><b>timestamp</b> → <b>hour-local</b> — fix time converted to America/New_York</div>
+              should not be over-read. The midday dip is shallow and no individual inverts it, so these bobcats read as
+              <b>crepuscular by tendency rather than strictly nocturnal</b>: one shared daily rhythm, scaled up or down
+              per animal.</p>
+            <div class="vardef"><b>timestamp</b> → <b>hour-local</b>: fix time converted to America/New_York</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- =============== COLUMN 3 — MINING + STATS =============== -->
+    <!-- =============== COLUMN 3 - MINING + STATS =============== -->
     <div class="col">
       <div class="card">
         <h2>Behavioral States · <span class="ac">Data Mining</span></h2>
         <p style="font-size:.9em"><strong>HDBSCAN</strong> density clustering (Campello et&nbsp;al., 2015) segments every
           fix by its kinematics into <strong style="color:var(--rust)">Resting · Foraging · Traveling</strong>,
-          recovering each cat's activity budget — a structure the raw data never labels.</p>
+          recovering each cat's activity budget, a structure the raw data never labels.</p>
         <div class="split fig-note" style="margin-top:.14in">
           <div class="fig" style="--ar:1.50"><img src="figures/06_hdbscan_discovered_states.jpg" alt="HDBSCAN discovered behavioral states scatter plot"></div>
           <div>
             <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> Three dense modes survive and about half of all fixes stay
-              <b>transitional</b> (grey) — behaviour grades rather than switches. Ranked by median speed and step length:
+              <b>transitional</b> (grey), so behaviour grades rather than switches. Ranked by median speed and step length:
               <b>Resting</b> (near-zero speed, sub-metre steps), <b>Foraging</b> (slow but ~19 m displacements, i.e.
-              localized searching) and <b>Traveling</b> (~46 m directed steps).</p>
+              localized searching) and <b>Traveling</b> (~46 m directed steps). The two axes are the engineered
+              kinematic features themselves, and clustering saw <b>only</b> those: no time, no identity, no sex. The
+              states are therefore <b>discovered, not assumed</b>.</p>
+            <div class="vardef"><b>ground-speed · step-length</b>: per-fix kinematics derived from consecutive GPS positions</div>
           </div>
         </div>
         <div class="split fig-note" style="margin-top:.2in">
           <div class="fig" style="--ar:1.95"><img src="figures/07_activity_budgets.jpg" alt="Activity budget per bobcat, stacked bar chart"></div>
           <div>
-            <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> <span class="id">LYRU_0001</span> is the outlier — <b>61%
+            <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> <span class="id">LYRU_0001</span> is the outlier at <b>61%
               Resting</b>, barely 5% Traveling. Every other cat is <b>Foraging-dominated (67–87%)</b>, with
               <span class="id">LYRU_0006</span> and <span class="id">LYRU_0008</span> most mobile (~32% Traveling). The
               hourly state mix stays flat, so Q4's dawn/dusk peak is a <b>graded rise in speed</b>, not a switch into
-              Traveling.</p>
+              Traveling. Each bar is a share of that cat's own classified fixes, so the very uneven deployment lengths
+              do not distort it: read the <b>mix</b>, not the height.</p>
           </div>
         </div>
       </div>
@@ -471,14 +497,14 @@ strong{font-weight:700;color:var(--navy)}
           <p class="hyp"><span class="h">H₀</span>Speed is equal across juvenile / subadult / adult.</p>
           <p class="hyp"><span class="h">H₁</span>At least one life-stage differs.</p>
           <div class="result"><span class="stat">0.20 / 0.25 / 0.26 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
-          <p class="tnote">Speed rises with age — competency develops, not fixed from birth.</p>
+          <p class="tnote">Speed rises with age: competency develops, it is not fixed from birth.</p>
         </div>
       </div>
 
       <div class="card spread">
         <h2><span class="ac">Recommendations</span></h2>
         <ul class="kf">
-          <li><b>Correct for collar age.</b> Fix-success confounds with battery &amp; deployment length — don't read raw ping density as an activity proxy.</li>
+          <li><b>Correct for collar age.</b> Fix-success confounds with battery &amp; deployment length, so don't read raw ping density as an activity proxy.</li>
           <li><b>Leverage known territories</b> &amp; dawn/dusk peaks when designing future carnivore or prey studies in the forest.</li>
           <li><b>Sample balanced by sex &amp; life-stage</b> so future work can separate genuine patterns from tracked-individual artifacts.</li>
         </ul>
@@ -492,7 +518,7 @@ strong{font-weight:700;color:var(--navy)}
       <b>References ·</b> LaPoint, S. (2026). <span class="sci">Carnivore movements near Black Rock Forest New York</span> [dataset]. Movebank Data Repository. &nbsp;·&nbsp;
       Oliver, R. Y. et&nbsp;al. (2026). Interacting effects of human presence and landscape modification on birds and mammals. <span class="sci">Science, 392</span>(6800), 879–884. &nbsp;·&nbsp;
       Campello, R. J. G. B. et&nbsp;al. (2015). Hierarchical density estimates for data clustering, visualization &amp; outlier detection. <span class="sci">ACM TKDD.</span><br>
-      <span style="color:var(--rust)">Generative AI — used for grammar checking &amp; code assistance; all analysis &amp; interpretation by the authors.</span>
+      <span style="color:var(--navy-deep)">Generative AI: used for grammar checking &amp; code assistance; all analysis &amp; interpretation by the authors.</span>
     </div>
     <div class="foot-right">
       <div class="bm">ANIMOVE</div>
