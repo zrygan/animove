@@ -202,6 +202,13 @@ strong{font-weight:700;color:var(--navy)}
 .result .verdict{font-family:var(--disp);font-weight:600;font-size:.82em;text-transform:uppercase;
   letter-spacing:.03em;color:var(--navy-deep);background:var(--gold);border-radius:5px;padding:.02in .13in}
 .tnote{font-size:.82em;color:var(--muted);line-height:1.3;margin-top:.08in}
+/* hypotheses on the left, the notebook's raw output printed beside them.
+   The test text only ever fills the left half of the block, so the console
+   capture costs almost no extra height. */
+.test-body{display:grid;grid-template-columns:1fr .68fr;gap:.18in;align-items:start}
+.out{border:1px solid var(--navy);border-radius:8px;overflow:hidden;background:var(--navy-deep);
+  box-shadow:0 1px 6px rgba(38,37,79,.12)}
+.out img{width:100%;display:block}
 
 /* key findings */
 .kf{list-style:none;counter-reset:k}
@@ -452,9 +459,9 @@ strong{font-weight:700;color:var(--navy)}
             <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> Three dense modes survive and about half of all fixes stay
               <b>transitional</b> (grey), so behaviour grades rather than switches. Ranked by median speed and step length:
               <b>Resting</b> (near-zero speed, sub-metre steps), <b>Foraging</b> (slow but ~19 m displacements, i.e.
-              localized searching) and <b>Traveling</b> (~46 m directed steps). The two axes are the engineered
-              kinematic features themselves, and clustering saw <b>only</b> those: no time, no identity, no sex. The
-              states are therefore <b>discovered, not assumed</b>.</p>
+              localized searching) and <b>Traveling</b> (~46 m directed steps). Clustering saw <b>only</b> the two
+              kinematic axes plotted here, never time, identity or sex, so the states are
+              <b>discovered, not assumed</b>.</p>
             <div class="vardef"><b>ground-speed · step-length</b>: per-fix kinematics derived from consecutive GPS positions</div>
           </div>
         </div>
@@ -478,26 +485,44 @@ strong{font-weight:700;color:var(--navy)}
 
         <div class="test">
           <div class="tn">Behavioral state vs. time of day<small>χ² Test of Independence · df = 4</small></div>
-          <p class="hyp"><span class="h">H₀</span>State is independent of time-of-day period.</p>
-          <p class="hyp"><span class="h">H₁</span>State is associated with time-of-day period.</p>
-          <div class="result"><span class="stat">χ² = 51.3 · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
-          <p class="tnote">Traveling concentrates in crepuscular hours (04–08h &amp; 16–19h).</p>
+          <div class="test-body">
+            <div>
+              <p class="hyp"><span class="h">H₀</span>State is independent of time-of-day period.</p>
+              <p class="hyp"><span class="h">H₁</span>State is associated with time-of-day period.</p>
+              <div class="result"><span class="stat">χ² = 51.3 · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
+              <p class="tnote">Traveling concentrates in crepuscular hours (04–08h &amp; 16–19h).</p>
+            </div>
+            <div class="out"><img src="figures/08_chi2_state_vs_time_of_day.png"
+              alt="Notebook output: contingency table of behavioral state by time-of-day period, chi2 = 51.34, dof = 4, p = 1.894e-10"></div>
+          </div>
         </div>
 
         <div class="test">
           <div class="tn">Ground-speed by biological sex<small>Mann–Whitney U Test</small></div>
-          <p class="hyp"><span class="h">H₀</span>Speed distributions are equal for males &amp; females.</p>
-          <p class="hyp"><span class="h">H₁</span>Speed distributions differ by sex.</p>
-          <div class="result"><span class="stat">0.33 vs 0.22 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
-          <p class="tnote">Males move ~50% faster at the median.</p>
+          <div class="test-body">
+            <div>
+              <p class="hyp"><span class="h">H₀</span>Speed distributions are equal for males &amp; females.</p>
+              <p class="hyp"><span class="h">H₁</span>Speed distributions differ by sex.</p>
+              <div class="result"><span class="stat">0.33 vs 0.22 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
+              <p class="tnote">Males move ~50% faster at the median.</p>
+            </div>
+            <div class="out"><img src="figures/09_mann_whitney_speed_by_sex.png"
+              alt="Notebook output: 11,317 male and 100,915 female observations, median ground-speed 0.33 vs 0.22 m/s, Mann-Whitney U = 665202238.5, p = 1.1813e-182"></div>
+          </div>
         </div>
 
         <div class="test">
           <div class="tn">Ground-speed across life-stages<small>Kruskal–Wallis H Test</small></div>
-          <p class="hyp"><span class="h">H₀</span>Speed is equal across juvenile / subadult / adult.</p>
-          <p class="hyp"><span class="h">H₁</span>At least one life-stage differs.</p>
-          <div class="result"><span class="stat">0.20 / 0.25 / 0.26 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
-          <p class="tnote">Speed rises with age: competency develops, it is not fixed from birth.</p>
+          <div class="test-body">
+            <div>
+              <p class="hyp"><span class="h">H₀</span>Speed is equal across juvenile / subadult / adult.</p>
+              <p class="hyp"><span class="h">H₁</span>At least one life-stage differs.</p>
+              <div class="result"><span class="stat">0.20 / 0.25 / 0.26 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
+              <p class="tnote">Speed rises with age: competency develops, it is not fixed from birth.</p>
+            </div>
+            <div class="out"><img src="figures/10_kruskal_wallis_speed_by_life_stage.png"
+              alt="Notebook output: 30,155 adult, 41,077 subadult and 41,000 juvenile observations, median ground-speed 0.26 / 0.25 / 0.20 m/s, Kruskal-Wallis H = 550.36, p = 3.0991e-120"></div>
+          </div>
         </div>
       </div>
 
