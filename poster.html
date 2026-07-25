@@ -88,13 +88,22 @@ html,body{background:#d9d3c2;color:var(--ink);font-family:var(--body)}
 .rq .rq-text b{font-style:normal;font-weight:700;color:var(--rust)}
 
 /* =====================  BODY  ===================== */
-.body{display:grid;grid-template-columns:1fr 1.5fr 1.16fr;gap:.32in;min-height:0}
-.col{display:flex;flex-direction:column;gap:.28in;min-height:0}
+.body{display:grid;grid-template-columns:1fr 1.72fr 1.18fr;gap:.32in;min-height:0}
+.col{display:flex;flex-direction:column;gap:.26in;min-height:0}
 
 /* clean dashed card */
 .card{background:var(--paper);border:2px dashed var(--gold-line);border-radius:16px;
   padding:.3in .34in .32in;box-shadow:0 2px 10px rgba(38,37,79,.05)}
 .card.grow{flex:1;display:flex;flex-direction:column}
+/* ---- column-filling helpers ------------------------------------------
+   Columns 1 and 3 are shorter than column 2, so their picture and list
+   cards stretch into the leftover height instead of leaving the bottom
+   third of the poster empty. Each column ends flush with the footer. */
+.card.photo-card{flex:2.4 1 auto;display:flex;padding:.22in}
+.card.spread{flex:1 1 auto;display:flex;flex-direction:column}
+.card.spread > ul{flex:1;display:flex;flex-direction:column;justify-content:space-around}
+.card.spread > ul > li{margin-bottom:0}
+.card.spread-b{flex:1 1 auto;display:flex;flex-direction:column;justify-content:space-between}
 .card > h2{font-family:var(--disp);font-weight:700;font-size:1.42em;color:var(--navy);
   text-align:center;line-height:1.06;margin-bottom:.18in}
 .card > h2 .ac{color:var(--rust)}
@@ -127,6 +136,29 @@ strong{font-weight:700;color:var(--navy)}
 .drop .ds{font-family:var(--mono);font-size:.74em;color:var(--rust);letter-spacing:.02em}
 .photo{min-height:3.5in}
 
+/* ---- figure frame ----------------------------------------------------
+   Every chart is exported 1800×1200 (3:2) but carries a wide matplotlib
+   white margin. --ar is set per figure to that figure's *content* ratio,
+   so object-fit:cover trims only the blank margin and never clips a
+   title, axis label or legend. Never set --ar above the values below. */
+.fig{position:relative;width:100%;aspect-ratio:var(--ar,1.6);
+  border-radius:12px;overflow:hidden;background:#fff}
+.fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+/* .fill drops the fixed ratio and absorbs whatever column height is left */
+.fig.fill{aspect-ratio:auto;flex:1 1 0;min-height:1.6in}
+
+/* short read-this-graph note printed under every figure */
+.note{font-size:.83em;line-height:1.35;margin-top:.1in}
+.note .nl{font-family:var(--disp);font-weight:600;color:var(--rust);margin-right:.04in}
+.note b{font-weight:600;color:var(--navy)}
+.note .id{font-family:var(--mono);font-size:.94em;color:var(--rust)}
+
+/* dataset-at-a-glance stat grid */
+.stats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:.13in .2in}
+.stats li{border-left:.05in solid var(--gold);padding-left:.13in;line-height:1.15}
+.stats .sv{display:block;font-family:var(--mono);font-weight:600;font-size:1.12em;color:var(--rust)}
+.stats .sk{display:block;font-size:.8em;color:var(--muted);line-height:1.28;margin-top:.02in}
+
 /* EDA question unit */
 .q{display:grid;grid-template-columns:auto 1fr;gap:.18in;align-items:start;margin:.18in 0 .12in}
 .q:first-of-type{margin-top:.1in}
@@ -136,6 +168,8 @@ strong{font-weight:700;color:var(--navy)}
 .vardef{font-family:var(--mono);font-size:.76em;color:var(--muted);line-height:1.5;margin-top:.09in}
 .vardef b{color:var(--rust);font-weight:600}
 .split{display:grid;grid-template-columns:1fr 1fr;gap:.22in}
+/* graph + its explanation side by side — the graph keeps the lion's share */
+.split.fig-note{grid-template-columns:1.6fr 1fr}
 
 /* biological-profile table */
 .tbl{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:.8em;
@@ -245,8 +279,20 @@ strong{font-weight:700;color:var(--navy)}
           <strong>(HDBSCAN)</strong> and temporal feature engineering to relate biological traits to behavior.</p>
       </div>
 
+      <div class="card photo-card">
+        <div class="fig fill"><img src="figures/00_bobcat_stock_image.jpg" alt="Bobcat (Lynx rufus) resting on a log"></div>
+      </div>
+
       <div class="card">
-        <img src="figures/00_bobcat_stock_image.jpg" alt="Bobcat (Lynx rufus) resting on a log" style="width:100%;height:3.5in;object-fit:cover;border-radius:12px;display:block">
+        <h2>Dataset at a <span class="ac">Glance</span></h2>
+        <ul class="stats">
+          <li><span class="sv">112,232</span><span class="sk">cleaned <span class="sci">Lynx rufus</span> fixes (from 131,930 raw)</span></li>
+          <li><span class="sv">7</span><span class="sk">collared individuals · 2020–2026</span></li>
+          <li><span class="sv">~2 min</span><span class="sk">median interval between fixes</span></li>
+          <li><span class="sv">3–261 d</span><span class="sk">range of collar deployment lengths</span></li>
+          <li><span class="sv">~78%</span><span class="sk">of all fixes come from just two cats</span></li>
+          <li><span class="sv">1 of 7</span><span class="sk">cats tracked across all four seasons</span></li>
+        </ul>
       </div>
 
       <div class="card">
@@ -259,7 +305,7 @@ strong{font-weight:700;color:var(--navy)}
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card spread">
         <h2>Potential <span class="ac">Biases</span></h2>
         <ul class="defs">
           <li><span class="t">Small sample.</span> 100k+ pings but only <span class="num">n = 7</span> individuals — trends describe this local sample, not the species.</li>
@@ -269,7 +315,7 @@ strong{font-weight:700;color:var(--navy)}
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card spread">
         <h2>Key Findings &amp; <span class="ac">Conclusions</span></h2>
         <ul class="kf">
           <li>Movement, activity &amp; territory vary <b>by individual, not just category</b>: <span class="num">LYRU_0008</span> is fastest (~0.5&nbsp;m/s) &amp; ranges widest; juvenile <span class="num">LYRU_0003</span> is slowest with a small range.</li>
@@ -296,7 +342,7 @@ strong{font-weight:700;color:var(--navy)}
         <!-- Q1 -->
         <div class="q"><span class="qn">Q1</span><span class="qt">What is the distribution of tracking data across bobcats, and what are their biological profiles?</span></div>
         <div class="split">
-          <img src="figures/01_average_locations_per_day.jpg" alt="Average locations logged per day, per bobcat" style="width:100%;height:2.3in;object-fit:cover;border-radius:12px;display:block">
+          <div class="fig" style="--ar:1.70"><img src="figures/01_average_locations_per_day.jpg" alt="Average locations logged per day, per bobcat"></div>
           <div>
             <div class="tbl-cap">Biological profiles</div>
             <table class="tbl">
@@ -311,26 +357,63 @@ strong{font-weight:700;color:var(--navy)}
                 <tr><td>LYRU_0008</td><td class="m">m</td><td>11400</td><td>adult</td></tr>
               </tbody>
             </table>
+            <p class="note"><span class="nl">Reading it:</span> Males outweigh the females of the same life stage, but
+              body mass does <b>not</b> predict how much data a collar returns — <span class="id">LYRU_0006</span> logs the
+              most fixes per day (~208) while <span class="id">LYRU_0001</span>, tracked longest at 261 days, logs the
+              fewest (~101). Deployments ran <b>3–261 days</b>, so this bar chart mostly measures collar battery life and
+              canopy interference; it is a <b>fix-success</b> plot, not an activity plot.</p>
+            <div class="vardef"><b>animal-sex · animal-mass · animal-life-stage</b> — capture metadata &nbsp;·&nbsp; <b>animal-id</b> — per-cat identifier</div>
           </div>
         </div>
 
         <!-- Q2 -->
         <div class="q"><span class="qn">Q2</span><span class="qt">How do general activity levels and ground speeds vary among individual bobcats?</span></div>
-        <img src="figures/02_distribution_of_ground_speeds.jpg" alt="Distribution of ground speeds per bobcat, log scale" style="width:100%;height:2in;object-fit:cover;border-radius:12px;display:block">
-        <div class="vardef"><b>ground-speed</b> — sensor movement velocity (m/s) &nbsp;·&nbsp; <b>animal-id</b> — per-cat identifier (LYRU_000X)</div>
+        <div class="split">
+          <div class="fig" style="--ar:2.10"><img src="figures/02_distribution_of_ground_speeds.jpg" alt="Distribution of ground speeds per bobcat, log scale"></div>
+          <div>
+            <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> Raw speeds were so right-skewed that
+              the boxes collapsed onto zero, so the axis is <b>log-scaled</b>. Every cat keeps the same shape — long
+              stretches near 0 m/s with a tail of sprint outliers — confirming a <b>shared movement ecology</b>.
+              What differs is the typical pace: <span class="id">LYRU_0008</span> is the most active (median
+              <b>~0.50 m/s</b>, widest IQR), the juvenile <span class="id">LYRU_0003</span> the least
+              (<b>~0.18 m/s</b>) yet it owns the single most extreme sprint; the other five sit between
+              0.24 and 0.29 m/s.</p>
+            <div class="vardef"><b>ground-speed</b> — sensor movement velocity (m/s), log-scaled here</div>
+          </div>
+        </div>
 
         <!-- Q3 -->
         <div class="q"><span class="qn">Q3</span><span class="qt">Where are the territorial boundaries of these bobcats, and do their home ranges overlap?</span></div>
         <div class="split">
-          <img src="figures/03_home_ranges_by_individual.jpg" alt="Bobcat home ranges by individual" style="width:100%;height:2.2in;object-fit:cover;border-radius:12px;display:block">
-          <img src="figures/04_home_ranges_by_sex.jpg" alt="Bobcat home range overlaps by sex" style="width:100%;height:2.2in;object-fit:cover;border-radius:12px;display:block">
+          <div class="fig" style="--ar:1.50"><img src="figures/03_home_ranges_by_individual.jpg" alt="Bobcat home ranges by individual"></div>
+          <div class="fig" style="--ar:1.50"><img src="figures/04_home_ranges_by_sex.jpg" alt="Bobcat home range overlaps by sex"></div>
         </div>
+        <p class="note"><span class="nl">Reading it:</span> The fixes form <b>bounded, structured home ranges</b> — dense
+          linear track webs — rather than one diffuse cloud, and same-sex ranges sit side by side rather than on top of each
+          other (<b>intrasexual exclusion</b>, which limits resource competition). The adult male
+          <span class="id">LYRU_0008</span> holds the higher latitudes and only briefly dips into female territory, the
+          pattern expected of a solitary carnivore meeting only to mate. Footprints differ by an order of magnitude:
+          <span class="id">LYRU_0005</span> / <span class="id">LYRU_0006</span> stay inside ~1 km², while
+          <span class="id">LYRU_0004</span> / <span class="id">LYRU_0008</span> cover <b>&gt;11 km N–S and &gt;14 km E–W</b>.
+          The heavy orange / green / blue saturation is the sampling skew, not extra activity.</p>
         <div class="vardef"><b>location-lat / location-long</b> — decimal-degree coordinates of each GPS fix</div>
 
         <!-- Q4 -->
         <div class="q"><span class="qn">Q4</span><span class="qt">Do all bobcats share the same daily rhythm, or hunt / rest at different times?</span></div>
-        <img src="figures/05_local_hourly_activity_patterns.jpg" alt="Local hourly activity patterns per bobcat" style="width:100%;height:2in;object-fit:cover;border-radius:12px;display:block">
-        <div class="vardef"><b>timestamp</b> — fix date-time, converted to local hour &amp; season in feature engineering</div>
+        <div class="split">
+          <div class="fig" style="--ar:2.25"><img src="figures/05_local_hourly_activity_patterns.jpg" alt="Local hourly activity patterns per bobcat"></div>
+          <div>
+            <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> <b>Timing is shared; amplitude is
+              individual.</b> Pooled mean speed is <b>0.43 m/s</b> across both crepuscular windows (04–08h and 16–19h)
+              against <b>0.34 m/s</b> at midday — a ~21% dip — and the curves move together (mean pairwise correlation
+              <b>0.41</b>). <span class="id">LYRU_0001</span>–<span class="id">LYRU_0003</span> peak at dawn (06–08h)
+              while the adult male <span class="id">LYRU_0008</span> peaks at dusk (18h) and runs fastest all day.
+              <span class="id">LYRU_0002</span> is nearly flat (amplitude 0.11 m/s); the jagged
+              <span class="id">LYRU_0005</span> / <span class="id">LYRU_0006</span> lines rest on only 362–467 fixes and
+              should not be over-read.</p>
+            <div class="vardef"><b>timestamp</b> → <b>hour-local</b> — fix time converted to America/New_York</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -341,13 +424,28 @@ strong{font-weight:700;color:var(--navy)}
         <p style="font-size:.9em"><strong>HDBSCAN</strong> density clustering (Campello et&nbsp;al., 2015) segments every
           fix by its kinematics into <strong style="color:var(--rust)">Resting · Foraging · Traveling</strong>,
           recovering each cat's activity budget — a structure the raw data never labels.</p>
-        <div class="split" style="margin-top:.14in">
-          <img src="figures/06_hdbscan_discovered_states.jpg" alt="HDBSCAN discovered behavioral states scatter plot" style="width:100%;height:2.1in;object-fit:cover;border-radius:12px;display:block">
-          <img src="figures/07_activity_budgets.jpg" alt="Activity budget per bobcat, stacked bar chart" style="width:100%;height:2.1in;object-fit:cover;border-radius:12px;display:block">
+        <div class="split fig-note" style="margin-top:.14in">
+          <div class="fig" style="--ar:1.50"><img src="figures/06_hdbscan_discovered_states.jpg" alt="HDBSCAN discovered behavioral states scatter plot"></div>
+          <div>
+            <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> Three dense modes survive and about half of all fixes stay
+              <b>transitional</b> (grey) — behaviour grades rather than switches. Ranked by median speed and step length:
+              <b>Resting</b> (near-zero speed, sub-metre steps), <b>Foraging</b> (slow but ~19 m displacements, i.e.
+              localized searching) and <b>Traveling</b> (~46 m directed steps).</p>
+          </div>
+        </div>
+        <div class="split fig-note" style="margin-top:.2in">
+          <div class="fig" style="--ar:1.95"><img src="figures/07_activity_budgets.jpg" alt="Activity budget per bobcat, stacked bar chart"></div>
+          <div>
+            <p class="note" style="margin-top:0"><span class="nl">Reading it:</span> <span class="id">LYRU_0001</span> is the outlier — <b>61%
+              Resting</b>, barely 5% Traveling. Every other cat is <b>Foraging-dominated (67–87%)</b>, with
+              <span class="id">LYRU_0006</span> and <span class="id">LYRU_0008</span> most mobile (~32% Traveling). The
+              hourly state mix stays flat, so Q4's dawn/dusk peak is a <b>graded rise in speed</b>, not a switch into
+              Traveling.</p>
+          </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card spread-b">
         <h2>Statistical <span class="ac">Inference</span></h2>
         <p class="muted" style="font-size:.86em;margin-bottom:.14in">Ground-speed is strongly right-skewed, so we use
           <strong style="color:var(--navy)">non-parametric, rank-based tests</strong> that resist outlier sprints.</p>
@@ -377,7 +475,7 @@ strong{font-weight:700;color:var(--navy)}
         </div>
       </div>
 
-      <div class="card">
+      <div class="card spread">
         <h2><span class="ac">Recommendations</span></h2>
         <ul class="kf">
           <li><b>Correct for collar age.</b> Fix-success confounds with battery &amp; deployment length — don't read raw ping density as an activity proxy.</li>
