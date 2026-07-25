@@ -204,11 +204,16 @@ strong{font-weight:700;color:var(--navy)}
 .tnote{font-size:.82em;color:var(--muted);line-height:1.3;margin-top:.08in}
 /* hypotheses on the left, the notebook's raw output printed beside them.
    The test text only ever fills the left half of the block, so the console
-   capture costs almost no extra height. */
+   capture costs almost no extra height. Set as live text, not a screenshot,
+   so it stays sharp at 48in and matches the poster's mono face. */
 .test-body{display:grid;grid-template-columns:1fr .68fr;gap:.18in;align-items:start}
-.out{border:1px solid var(--navy);border-radius:8px;overflow:hidden;background:var(--navy-deep);
-  box-shadow:0 1px 6px rgba(38,37,79,.12)}
-.out img{width:100%;display:block}
+.out{border:1px solid var(--gold-line);border-radius:8px;background:#f1ecdc;
+  padding:.12in .15in}
+/* .68em keeps the widest line (40 chars, Kruskal-Wallis) inside the .68fr
+   column; any larger and the grid steals width from the result bar beside it */
+.out pre{font-family:var(--mono);font-size:.68em;line-height:1.45;color:var(--ink);
+  white-space:pre;margin:0}
+.out .hl{color:var(--rust);font-weight:600}
 
 /* key findings */
 .kf{list-style:none;counter-reset:k}
@@ -492,8 +497,13 @@ strong{font-weight:700;color:var(--navy)}
               <div class="result"><span class="stat">χ² = 51.3 · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
               <p class="tnote">Traveling concentrates in crepuscular hours (04–08h &amp; 16–19h).</p>
             </div>
-            <div class="out"><img src="figures/08_chi2_state_vs_time_of_day.png"
-              alt="Notebook output: contingency table of behavioral state by time-of-day period, chi2 = 51.34, dof = 4, p = 1.894e-10"></div>
+            <div class="out"><pre>period      Crepuscular  Midday  Other
+behavior
+Foraging           2967     939   2670
+Resting             375     168    466
+Traveling           868     180    711
+<span class="hl">chi2=51.34, dof=4, p=1.894e-10</span>
+min expected count=139.0</pre></div>
           </div>
         </div>
 
@@ -506,8 +516,12 @@ strong{font-weight:700;color:var(--navy)}
               <div class="result"><span class="stat">0.33 vs 0.22 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
               <p class="tnote">Males move ~50% faster at the median.</p>
             </div>
-            <div class="out"><img src="figures/09_mann_whitney_speed_by_sex.png"
-              alt="Notebook output: 11,317 male and 100,915 female observations, median ground-speed 0.33 vs 0.22 m/s, Mann-Whitney U = 665202238.5, p = 1.1813e-182"></div>
+            <div class="out"><pre>Male observations: 11317
+Female observations: 100915
+Median ground-speed (male): 0.33 m/s
+Median ground-speed (female): 0.22 m/s
+<span class="hl">Mann-Whitney U statistic: 665202238.5
+p-value: 1.1813e-182</span></pre></div>
           </div>
         </div>
 
@@ -520,8 +534,14 @@ strong{font-weight:700;color:var(--navy)}
               <div class="result"><span class="stat">0.20 / 0.25 / 0.26 m/s · p &lt; 0.001</span><span class="verdict">Reject H₀</span></div>
               <p class="tnote">Speed rises with age: competency develops, it is not fixed from birth.</p>
             </div>
-            <div class="out"><img src="figures/10_kruskal_wallis_speed_by_life_stage.png"
-              alt="Notebook output: 30,155 adult, 41,077 subadult and 41,000 juvenile observations, median ground-speed 0.26 / 0.25 / 0.20 m/s, Kruskal-Wallis H = 550.36, p = 3.0991e-120"></div>
+            <div class="out"><pre>Adult obs: 30155
+Subadult obs: 41077
+Juvenile obs: 41000
+Median ground-speed (adult): 0.26 m/s
+Median ground-speed (subadult): 0.25 m/s
+Median ground-speed (juvenile): 0.20 m/s
+<span class="hl">Kruskal-Wallis H statistic: 550.36
+p-value: 3.0991e-120</span></pre></div>
           </div>
         </div>
       </div>
