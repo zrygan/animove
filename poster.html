@@ -246,12 +246,7 @@ strong{font-weight:700;color:var(--navy)}
       </div>
 
       <div class="card">
-        <div class="drop photo">
-          <div class="ic">◨</div>
-          <div class="dt">Bobcat <span class="sci">(Lynx rufus)</span> — field photo</div>
-          <div class="dd">Drop a subject or collared-individual image here.</div>
-          <div class="ds">→ figs/bobcat.jpg</div>
-        </div>
+        <img src="figures/00_bobcat_stock_image.jpg" alt="Bobcat (Lynx rufus) resting on a log" style="width:100%;height:3.5in;object-fit:cover;border-radius:12px;display:block">
       </div>
 
       <div class="card">
@@ -301,11 +296,7 @@ strong{font-weight:700;color:var(--navy)}
         <!-- Q1 -->
         <div class="q"><span class="qn">Q1</span><span class="qt">What is the distribution of tracking data across bobcats, and what are their biological profiles?</span></div>
         <div class="split">
-          <div class="drop" style="min-height:2.3in">
-            <div class="ic">▤</div><div class="dt">Avg. locations / day</div>
-            <div class="dd">Per-cat fixes normalized by tracking duration.</div>
-            <div class="ds">→ EDA #1 bar</div>
-          </div>
+          <img src="figures/01_average_locations_per_day.jpg" alt="Average locations logged per day, per bobcat" style="width:100%;height:2.3in;object-fit:cover;border-radius:12px;display:block">
           <div>
             <div class="tbl-cap">Biological profiles</div>
             <table class="tbl">
@@ -325,28 +316,20 @@ strong{font-weight:700;color:var(--navy)}
 
         <!-- Q2 -->
         <div class="q"><span class="qn">Q2</span><span class="qt">How do general activity levels and ground speeds vary among individual bobcats?</span></div>
-        <div class="drop" style="min-height:2in">
-          <div class="ic">⊟</div><div class="dt">Distribution of ground speeds (log scale)</div>
-          <div class="dd">Per-cat box plots — every cat is strongly right-skewed: long rests, rare high-speed bursts.</div>
-          <div class="ds">→ EDA #2 box plot</div>
-        </div>
+        <img src="figures/02_distribution_of_ground_speeds.jpg" alt="Distribution of ground speeds per bobcat, log scale" style="width:100%;height:2in;object-fit:cover;border-radius:12px;display:block">
         <div class="vardef"><b>ground-speed</b> — sensor movement velocity (m/s) &nbsp;·&nbsp; <b>animal-id</b> — per-cat identifier (LYRU_000X)</div>
 
         <!-- Q3 -->
         <div class="q"><span class="qn">Q3</span><span class="qt">Where are the territorial boundaries of these bobcats, and do their home ranges overlap?</span></div>
         <div class="split">
-          <div class="drop" style="min-height:2.2in"><div class="ic">◈</div><div class="dt">Home ranges by individual</div><div class="ds">→ EDA #3a map</div></div>
-          <div class="drop" style="min-height:2.2in"><div class="ic">◈</div><div class="dt">Overlap by sex</div><div class="ds">→ EDA #3b map</div></div>
+          <img src="figures/03_home_ranges_by_individual.jpg" alt="Bobcat home ranges by individual" style="width:100%;height:2.2in;object-fit:cover;border-radius:12px;display:block">
+          <img src="figures/04_home_ranges_by_sex.jpg" alt="Bobcat home range overlaps by sex" style="width:100%;height:2.2in;object-fit:cover;border-radius:12px;display:block">
         </div>
         <div class="vardef"><b>location-lat / location-long</b> — decimal-degree coordinates of each GPS fix</div>
 
         <!-- Q4 -->
         <div class="q"><span class="qn">Q4</span><span class="qt">Do all bobcats share the same daily rhythm, or hunt / rest at different times?</span></div>
-        <div class="drop" style="min-height:2in">
-          <div class="ic">⋀</div><div class="dt">Local hourly activity patterns</div>
-          <div class="dd">Mean ground-speed per hour — all reliable cats peak 04–08h &amp; 16–19h, dip midday.</div>
-          <div class="ds">→ EDA #4 line plot</div>
-        </div>
+        <img src="figures/05_local_hourly_activity_patterns.jpg" alt="Local hourly activity patterns per bobcat" style="width:100%;height:2in;object-fit:cover;border-radius:12px;display:block">
         <div class="vardef"><b>timestamp</b> — fix date-time, converted to local hour &amp; season in feature engineering</div>
       </div>
     </div>
@@ -359,8 +342,8 @@ strong{font-weight:700;color:var(--navy)}
           fix by its kinematics into <strong style="color:var(--rust)">Resting · Foraging · Traveling</strong>,
           recovering each cat's activity budget — a structure the raw data never labels.</p>
         <div class="split" style="margin-top:.14in">
-          <div class="drop" style="min-height:2.1in"><div class="ic">⁛</div><div class="dt">Discovered states</div><div class="dd">HDBSCAN on log-speed × log-step.</div><div class="ds">→ §5 scatter</div></div>
-          <div class="drop" style="min-height:2.1in"><div class="ic">▥</div><div class="dt">Activity budget / cat</div><div class="dd">0001 rests 61%; others forage 67–87%.</div><div class="ds">→ §5 stacked bars</div></div>
+          <img src="figures/06_hdbscan_discovered_states.jpg" alt="HDBSCAN discovered behavioral states scatter plot" style="width:100%;height:2.1in;object-fit:cover;border-radius:12px;display:block">
+          <img src="figures/07_activity_budgets.jpg" alt="Activity budget per bobcat, stacked bar chart" style="width:100%;height:2.1in;object-fit:cover;border-radius:12px;display:block">
         </div>
       </div>
 
