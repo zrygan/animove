@@ -56,9 +56,6 @@ html,body{background:#d9d3c2;color:var(--ink);font-family:var(--body)}
   position:relative;overflow:hidden;
 }
 
-/* bobcat watermark bottom-right */
-.watermark{position:absolute;bottom:.9in;right:.5in;width:7.5in;opacity:.05;fill:var(--navy);pointer-events:none}
-
 /* =====================  HEADER  ===================== */
 .hero{background:var(--navy);border-radius:16px;position:relative;overflow:hidden;
   padding:.4in 3.4in .36in;text-align:center}
@@ -243,20 +240,8 @@ strong{font-weight:700;color:var(--navy)}
 }
 </style>
 
-<!-- reusable bobcat silhouette (prowling) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="bobcat" viewBox="0 0 220 130">
-  <path d="M8 96 C10 84 14 82 20 84 C18 74 22 66 30 64 L26 52 L34 60 L38 48 L44 60 C52 56 62 57 70 60
-    C86 52 104 50 120 54 C138 46 150 40 150 40 L146 26 L156 38 L162 22 L168 40 L176 30 L176 46
-    C186 52 196 62 200 76 C206 80 210 86 210 94 L204 94 C202 88 198 84 194 84 C196 92 194 100 188 104
-    L190 116 L182 110 L178 118 L172 108 C160 112 150 112 140 110 L142 120 L134 114 L130 122 L124 112
-    C104 114 84 112 66 104 C64 110 60 114 54 114 L56 122 L48 116 L44 122 L40 112
-    C28 110 18 106 12 100 Z"/>
-</symbol></svg>
-
 <div class="stage">
 <div class="poster">
-  <svg class="watermark"><use href="#bobcat"/></svg>
-
   <!-- ========================= HEADER ========================= -->
   <header class="hero">
     <svg class="rings l" viewBox="0 0 100 100"><circle cx="50" cy="50" r="12"/><circle cx="50" cy="50" r="22"/><circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="42"/></svg>
